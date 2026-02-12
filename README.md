@@ -4,6 +4,8 @@
 ## Project Objective
 To build a robust, scalable data pipeline that transforms raw Brazilian e-commerce data (Olist) into an audited, high-performance **Star Schema** (Gold Layer). The project focuses on handling complex order lifecycles, ensuring financial reconciliation, and implementing modern storage optimizations.
 
+This architecture demonstrates a production-grade Medallion Pipeline on Databricks Unity Catalog, utilizing Auto Loader with schema evolution for resilient ingestion into Delta Lake. I implemented Stateful Deduplication and Liquid Clustering in the Silver layer to optimize downstream performance, achieving $O(1)$ query speeds. The pipeline concludes with a Gold-layer audit gate, which successfully reconciled a $77k revenue variance through advanced window-function aggregations.
+
 ---
 
 ##  The Architecture: Medallion Pattern
@@ -58,6 +60,12 @@ Automated validation checks are integrated at the end of the pipeline:
 * **Uniqueness:** Validated grain integrity (Order ID + Item ID).
 
 ---
+
+## Lessons Learned & Future Scalability
+
+* **Handling Data Skew:** For larger datasets, I would implement **Salting** or leverage **Adaptive Query Execution (AQE)** to prevent "straggler" tasks during joins on popular products.
+* **Streaming Evolution:** As data volume grows, transitioning to **Delta Live Tables (DLT)** would allow for lower latency (minutes instead of hours) and built-in DQ "Expectations."
+* **Cost Optimization:** I would implement **Automated File Retention (Vacuuming)** and utilize **Serverless Compute** to ensure we only pay for the exact seconds the Auto Loader is active.
 
 ##  Data Dictionary (Gold Layer)
 
