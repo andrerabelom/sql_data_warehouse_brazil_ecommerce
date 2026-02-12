@@ -16,6 +16,8 @@ I implemented a 3-tier architecture within **Databricks Unity Catalog**:
 * **Gold (Curated):** * **Fact Table:** Designed `fact_orders` at the **Line-Item Grain** for deep analytical granularity.
     * **Optimization:** Implemented **Liquid Clustering** on `order_id` and `customer_id` for O(1) query performance.
 
+### Architecture's Diagram
+![Project Architecture](images/ecommerce_dataset_medallion.drawio.png)
 ---
 
 ##  Environment Setup & Reproducibility
