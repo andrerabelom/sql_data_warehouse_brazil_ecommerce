@@ -62,7 +62,7 @@ Automated validation checks are integrated at the end of the pipeline:
 | Column | Type | Description |
 | :--- | :--- | :--- |
 | `order_id` | String | Unique identifier for the order. |
-| `item_gross_revenue` | Double | Calculated: `price` + `freight_value`. |
+| `total_cost` | Double | Calculated: `price` + `freight_value`. |
 | `total_payment_value` | Double | Reconciled sum of all payment methods for the order. |
 | `is_ghost_sale` | Boolean | True if order exists in 'Orders' but has no items in 'Order_Items'. |
 | `delivery_diff_days` | Integer | Days between estimated and actual delivery (Silver engineered). |
